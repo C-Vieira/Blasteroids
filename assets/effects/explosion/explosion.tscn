@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://cf1ag78h5qbjy"]
+
+[ext_resource type="Script" path="res://assets/effects/explosion/explosion.gd" id="1_irann"]
+[ext_resource type="Texture2D" uid="uid://dsf7qcsxoksxn" path="res://entities/asteroid/art/stone_bits.png" id="2_wtyq6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2veon"]
+atlas = ExtResource("2_wtyq6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="Curve" id="Curve_57i4x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.340659), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Explosion" type="Node2D"]
+script = ExtResource("1_irann")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 6
+one_shot = true
+explosiveness = 1.0
+texture = SubResource("AtlasTexture_2veon")
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+scale_amount_curve = SubResource("Curve_57i4x")

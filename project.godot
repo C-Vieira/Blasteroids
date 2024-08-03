@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Blasteroids"
-run/main_scene="res://menu.tscn"
+run/main_scene="res://ui/title/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -44,10 +44,12 @@ version_control/autoload_on_startup=true
 [file_customization]
 
 folder_colors={
+"res://addons/": "pink",
 "res://assets/": "purple",
 "res://components/": "blue",
-"res://resources/": "green",
-"res://sounds/": "pink"
+"res://entities/": "green",
+"res://game/": "yellow",
+"res://ui/": "teal"
 }
 
 [input]

@@ -1,0 +1,47 @@
+[gd_scene load_steps=9 format=3 uid="uid://cyckrkweqnvss"]
+
+[ext_resource type="Script" path="res://entities/player/laser/laser.gd" id="1_l6dvf"]
+[ext_resource type="Texture2D" uid="uid://crw3fp322vk3b" path="res://entities/player/laser/art/asteroid_characters.png" id="2_11nof"]
+[ext_resource type="PackedScene" uid="uid://e6fdx0v41kpg" path="res://components/move_component.tscn" id="3_mulx2"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="4_q35sy"]
+[ext_resource type="Script" path="res://components/FlashComponent.gd" id="5_nx3bg"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="6_2o1qa"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f2j24"]
+atlas = ExtResource("2_11nof")
+region = Rect2(36, 4, 8, 8)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_f1ifh"]
+radius = 5.0
+height = 10.0
+
+[node name="Laser" type="Node2D"]
+top_level = true
+script = ExtResource("1_l6dvf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_f2j24")
+
+[node name="MoveComponent" parent="." node_paths=PackedStringArray("actor") instance=ExtResource("3_mulx2")]
+actor = NodePath("..")
+speed = 300
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(0, 5.96046e-08)
+scale = Vector2(0.3, 0.3)
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_q35sy")
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("5_nx3bg")
+sprite = NodePath("../Sprite2D")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("6_2o1qa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+visibility_layer = 2
+shape = SubResource("CapsuleShape2D_f1ifh")

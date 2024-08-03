@@ -1,8 +1,5 @@
 extends Node2D
 
-# Hello World! Again!
-# Changing some stuff around...
-
 @export var game_stats: GameStats
 
 @onready var score_label = $ScoreLabel

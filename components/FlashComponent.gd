@@ -1,7 +1,7 @@
 class_name FlashComponent
 extends Node
 
-const FLASH_MATERIAL = preload("res://white_flash_material.tres")
+const FLASH_MATERIAL = preload("res://assets/effects/shaders/white_flash/white_flash_material.tres")
 
 @export var sprite: CanvasItem
 

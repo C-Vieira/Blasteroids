@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b85vdsbj4ljxd"]
+
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="1_pij0u"]
+[ext_resource type="Script" path="res://game/generators/enemy/enemy_generator.gd" id="1_uufgj"]
+
+[node name="EnemyGenerator" type="Node2D"]
+script = ExtResource("1_uufgj")
+
+[node name="SpawnerComponent" type="Node" parent="."]
+script = ExtResource("1_pij0u")
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true

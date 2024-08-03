@@ -1,0 +1,50 @@
+[gd_scene load_steps=10 format=3 uid="uid://bhsx2e7ejfu3h"]
+
+[ext_resource type="Script" path="res://entities/crystal/crystal.gd" id="1_n2nnj"]
+[ext_resource type="Texture2D" uid="uid://dqgjros57sfcc" path="res://entities/crystal/art/rad_bits.png" id="2_1f1id"]
+[ext_resource type="Script" path="res://components/MoveComponent.gd" id="3_lgg11"]
+[ext_resource type="AudioStream" uid="uid://dij24i41mfgxf" path="res://entities/crystal/sounds/collected/collect.wav" id="4_jpb67"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="5_evhvl"]
+[ext_resource type="Script" path="res://components/ScoreComponent.gd" id="6_gea31"]
+[ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game/resources/score/game_stats.tres" id="7_nv0tp"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_q850k"]
+radius = 5.29955
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_txv61"]
+atlas = ExtResource("2_1f1id")
+region = Rect2(16, 0, 16, 16)
+
+[node name="Crystal" type="Area2D"]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("1_n2nnj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(0.943476, 1)
+shape = SubResource("CircleShape2D_q850k")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_txv61")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_lgg11")
+actor = NodePath("..")
+speed = 20
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, 0.5)
+scale = Vector2(0.35, 0.35)
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_jpb67")
+script = ExtResource("5_evhvl")
+
+[node name="ScoreComponent" type="Node" parent="."]
+script = ExtResource("6_gea31")
+game_stats = ExtResource("7_nv0tp")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="finished" from="VariablePitchAudioStreamPlayer" to="." method="_on_variable_pitch_audio_stream_player_finished"]

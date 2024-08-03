@@ -1,0 +1,163 @@
+[gd_scene load_steps=29 format=3 uid="uid://cawdyfpfsyjw2"]
+
+[ext_resource type="Script" path="res://entities/asteroid/asteroid.gd" id="1_3hoyi"]
+[ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_d1tvo"]
+[ext_resource type="Script" path="res://components/MoveComponent.gd" id="3_nshfr"]
+[ext_resource type="Texture2D" uid="uid://ceby2gb6cfreu" path="res://entities/asteroid/art/asteroids.png" id="4_8bbxd"]
+[ext_resource type="Texture2D" uid="uid://b6d8sd0dknlk6" path="res://entities/asteroid/art/old_asteroids.png" id="4_ym5vp"]
+[ext_resource type="Texture2D" uid="uid://dvutqdujegquv" path="res://entities/asteroid/art/crystal_overlay.png" id="5_5bxnv"]
+[ext_resource type="Script" path="res://components/HurtComponent.gd" id="6_5fgha"]
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_mx00i"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="8_4t6oi"]
+[ext_resource type="Script" path="res://components/DestroyedComponent.gd" id="9_osvtb"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="10_7tqnn"]
+[ext_resource type="Shape2D" uid="uid://dqvh2wqno0cy2" path="res://entities/asteroid/resources/sizes/asteroid_small.tres" id="11_mnakr"]
+[ext_resource type="Script" path="res://components/FlashComponent.gd" id="12_spurt"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="13_m3d13"]
+[ext_resource type="Script" path="res://components/ShakeComponent.gd" id="14_jxe84"]
+[ext_resource type="AudioStream" uid="uid://dp0el66lt1per" path="res://entities/player/sounds/hurt/hurt.wav" id="15_dcolr"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="16_wf0iy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gkm6s"]
+atlas = ExtResource("4_8bbxd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y2q7a"]
+atlas = ExtResource("4_8bbxd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pu48"]
+atlas = ExtResource("4_8bbxd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cadwe"]
+atlas = ExtResource("4_ym5vp")
+region = Rect2(0, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rd0r6"]
+atlas = ExtResource("4_ym5vp")
+region = Rect2(31, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5yno"]
+atlas = ExtResource("4_ym5vp")
+region = Rect2(62, 0, 31, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_q7q65"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gkm6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y2q7a")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pu48")
+}],
+"loop": true,
+"name": &"new_sizes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cadwe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rd0r6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5yno")
+}],
+"loop": true,
+"name": &"sizes_old",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i6kdb"]
+atlas = ExtResource("5_5bxnv")
+region = Rect2(0, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k1j37"]
+atlas = ExtResource("5_5bxnv")
+region = Rect2(31, 0, 31, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c1jdp"]
+atlas = ExtResource("5_5bxnv")
+region = Rect2(62, 0, 31, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n7hgl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i6kdb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k1j37")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c1jdp")
+}],
+"loop": true,
+"name": &"crystals",
+"speed": 5.0
+}]
+
+[node name="Asteroid" type="Node2D"]
+script = ExtResource("1_3hoyi")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_d1tvo")
+health = 3
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_nshfr")
+actor = NodePath("..")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_q7q65")
+animation = &"new_sizes"
+
+[node name="CrystalSprite" type="AnimatedSprite2D" parent="."]
+visible = false
+sprite_frames = SubResource("SpriteFrames_n7hgl")
+animation = &"crystals"
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurt_box_component")]
+script = ExtResource("6_5fgha")
+stats_component = NodePath("../StatsComponent")
+hurt_box_component = NodePath("../HurtboxComponent")
+
+[node name="SpawnerComponent" type="Node" parent="."]
+script = ExtResource("7_mx00i")
+scene = ExtResource("8_4t6oi")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroyed_effect_spawner_component")]
+script = ExtResource("9_osvtb")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroyed_effect_spawner_component = NodePath("../SpawnerComponent")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+script = ExtResource("10_7tqnn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+light_mask = 2
+position = Vector2(1, 0)
+shape = ExtResource("11_mnakr")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("12_spurt")
+sprite = NodePath("../Sprite")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("13_m3d13")
+sprite = NodePath("../Sprite")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("14_jxe84")
+node = NodePath("../Sprite")
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_dcolr")
+script = ExtResource("16_wf0iy")
