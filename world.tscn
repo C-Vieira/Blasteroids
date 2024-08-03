@@ -1,0 +1,43 @@
+[gd_scene load_steps=12 format=3 uid="uid://bw87fnf3n4w3"]
+
+[ext_resource type="Script" path="res://world.gd" id="1_8gclr"]
+[ext_resource type="PackedScene" uid="uid://bj0csrpwvuve7" path="res://player.tscn" id="1_vv7f7"]
+[ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game_stats.tres" id="2_2pals"]
+[ext_resource type="PackedScene" uid="uid://cawdyfpfsyjw2" path="res://asteroid.tscn" id="3_iodk6"]
+[ext_resource type="PackedScene" uid="uid://beytn8q2nwr4b" path="res://asteroid_generator.tscn" id="3_jq5jg"]
+[ext_resource type="PackedScene" uid="uid://b85vdsbj4ljxd" path="res://enemy_generator.tscn" id="5_5r86c"]
+[ext_resource type="PackedScene" uid="uid://d4hmo4bh1kw1t" path="res://ufo_enemy.tscn" id="5_ojbvk"]
+[ext_resource type="PackedScene" uid="uid://dvd15yhwgkyg2" path="res://space_background.tscn" id="7_4qw8h"]
+[ext_resource type="FontFile" uid="uid://b5526cms3egpi" path="res://pixel_font.ttf" id="8_pc2yk"]
+[ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://crt_effect.tscn" id="10_j6iuf"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7kt05"]
+font = ExtResource("8_pc2yk")
+font_size = 8
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_8gclr")
+game_stats = ExtResource("2_2pals")
+
+[node name="Player" parent="." instance=ExtResource("1_vv7f7")]
+position = Vector2(150, 124)
+
+[node name="AsteroidGenerator" parent="." instance=ExtResource("3_jq5jg")]
+AsteroidScene = ExtResource("3_iodk6")
+
+[node name="EnemyGenerator" parent="." instance=ExtResource("5_5r86c")]
+EnemyScene = ExtResource("5_ojbvk")
+
+[node name="SpaceBackground" parent="." instance=ExtResource("7_4qw8h")]
+
+[node name="ScoreLabel" type="Label" parent="."]
+texture_filter = 1
+offset_left = 4.0
+offset_top = 226.0
+offset_right = 71.0
+offset_bottom = 249.0
+text = "score: "
+label_settings = SubResource("LabelSettings_7kt05")
+
+[node name="CRTEffect" parent="." instance=ExtResource("10_j6iuf")]
+visible = false

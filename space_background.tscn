@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://dvd15yhwgkyg2"]
+
+[ext_resource type="Texture2D" uid="uid://bxqy3dqn5pi20" path="res://assets/distant_stars.png" id="1_jfpym"]
+[ext_resource type="Script" path="res://space_background.gd" id="1_l6ftg"]
+[ext_resource type="Texture2D" uid="uid://4w1sjvuhb3dx" path="res://assets/close_stars.png" id="2_vp861"]
+
+[node name="SpaceBackground" type="ParallaxBackground"]
+script = ExtResource("1_l6ftg")
+
+[node name="DistantStarsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="DistantStars" type="TextureRect" parent="DistantStarsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_jfpym")
+stretch_mode = 1
+
+[node name="CloseStarsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="CloseStars" type="TextureRect" parent="CloseStarsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_vp861")
+stretch_mode = 1

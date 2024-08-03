@@ -1,0 +1,103 @@
+[gd_scene load_steps=20 format=3 uid="uid://bj0csrpwvuve7"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_iptsk"]
+[ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_ebdg5"]
+[ext_resource type="Script" path="res://components/HurtComponent.gd" id="3_8x5l0"]
+[ext_resource type="PackedScene" uid="uid://b02a06lcfrtnl" path="res://components/spawner_component.tscn" id="3_crpag"]
+[ext_resource type="Texture2D" uid="uid://crw3fp322vk3b" path="res://assets/asteroid_characters.png" id="3_wrt8r"]
+[ext_resource type="PackedScene" uid="uid://cyckrkweqnvss" path="res://laser.tscn" id="4_sfldr"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="6_ubm2j"]
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_lma0n"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://explosion.tscn" id="8_b8sgi"]
+[ext_resource type="Script" path="res://components/DestroyedComponent.gd" id="8_w3w5f"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="10_yqnq6"]
+[ext_resource type="Script" path="res://components/FlashComponent.gd" id="11_kvsiy"]
+[ext_resource type="AudioStream" uid="uid://dtcgj622k4g" path="res://sounds/shoot.wav" id="12_cgl7o"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="12_du3i5"]
+[ext_resource type="Script" path="res://components/ShakeComponent.gd" id="12_jnxj8"]
+[ext_resource type="AudioStream" uid="uid://dp0el66lt1per" path="res://sounds/hurt.wav" id="16_hfu5v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2vtma"]
+atlas = ExtResource("3_wrt8r")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vvy3s"]
+radius = 5.0
+height = 12.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66gws"]
+radius = 12.0
+
+[node name="Player" type="CharacterBody2D"]
+script = ExtResource("1_iptsk")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_ebdg5")
+health = 4
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurt_box_component")]
+script = ExtResource("3_8x5l0")
+stats_component = NodePath("../StatsComponent")
+hurt_box_component = NodePath("../HurtboxComponent")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_2vtma")
+
+[node name="SpawnerComponent" parent="." instance=ExtResource("3_crpag")]
+scene = ExtResource("4_sfldr")
+
+[node name="Cannon1" type="Marker2D" parent="."]
+position = Vector2(-5, -3)
+metadata/_edit_group_ = true
+
+[node name="Cannon2" type="Marker2D" parent="."]
+position = Vector2(5, -3)
+metadata/_edit_group_ = true
+
+[node name="DeathEffectSpawner" type="Node" parent="."]
+script = ExtResource("7_lma0n")
+scene = ExtResource("8_b8sgi")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroyed_effect_spawner_component")]
+script = ExtResource("8_w3w5f")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroyed_effect_spawner_component = NodePath("../DeathEffectSpawner")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("10_yqnq6")
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("11_kvsiy")
+sprite = NodePath("../Sprite2D")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("12_jnxj8")
+node = NodePath("../Sprite2D")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_mask = 2
+script = ExtResource("6_ubm2j")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visibility_layer = 2
+shape = SubResource("CapsuleShape2D_vvy3s")
+
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+light_mask = 8
+visibility_layer = 4
+shape = SubResource("CircleShape2D_66gws")
+
+[node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_cgl7o")
+volume_db = -10.0
+script = ExtResource("12_du3i5")
+
+[node name="HurtAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("16_hfu5v")
+script = ExtResource("12_du3i5")
