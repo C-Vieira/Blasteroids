@@ -3,7 +3,7 @@ extends Node2D
 
 signal exploded(pos, size, had_crystals)
 
-@export var has_crystals = randi_range(0, 1)
+@export var has_crystals: bool = randi_range(0, 1)
 
 @onready var stats_component = $StatsComponent
 @onready var sprite = $Sprite
@@ -16,14 +16,15 @@ signal exploded(pos, size, had_crystals)
 @onready var scale_component = $ScaleComponent
 @onready var shake_component = $ShakeComponent
 @onready var variable_pitch_audio_stream_player = $VariablePitchAudioStreamPlayer
+@onready var visible_on_screen_notifier_2d: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 
-@export var size = randi_range(0, 2)
+@export var size: int = randi_range(0, 2)
 enum AsteroidSizes {LARGE, MEDIUM, SMALL}
 
-var direction_vector = Vector2.DOWN
+var direction_vector: Vector2 = Vector2.DOWN
 
 func _ready():
-	rotation = randf_range(0, 2*PI)
+	rotation = randf_range(0, PI)
 	move_component.direction = direction_vector.rotated(rotation)
 	
 	match size:
@@ -55,18 +56,7 @@ func _ready():
 	)
 	
 	stats_component.no_health.connect(explode)
-
-func _physics_process(delta):
-	var radius = collision_shape_2d.shape.radius
-	var screen_size = get_viewport_rect().size
-	if (global_position.y + radius) < 0:
-		global_position.y = (screen_size.y + radius)
-	elif (global_position.y - radius) > screen_size.y:
-		global_position.y = -radius
-	elif (global_position.x + radius) < 0:
-		global_position.x = (screen_size.x + radius)
-	elif (global_position.x - radius) > screen_size.x:
-		global_position.x = -radius
+	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
 
 func explode():
 	print("Exploded signal emitted")
