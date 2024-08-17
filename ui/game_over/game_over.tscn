@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://dhx7ev1ey10yl"]
 
 [ext_resource type="Script" path="res://ui/game_over/game_over.gd" id="1_bpk53"]
-[ext_resource type="PackedScene" uid="uid://dvd15yhwgkyg2" path="res://assets/effects/backgrounds/space_background.tscn" id="1_foupg"]
 [ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game/resources/score/game_stats.tres" id="2_ghejw"]
 [ext_resource type="FontFile" uid="uid://b5526cms3egpi" path="res://assets/fonts/pixel_font.ttf" id="2_wrgwn"]
 [ext_resource type="AudioStream" uid="uid://caao74rs3ilpv" path="res://entities/player/sounds/lose/lose.wav" id="3_745o2"]
+[ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="3_k3tv3"]
 [ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="4_h07xj"]
 [ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="7_jtajy"]
 
@@ -28,7 +28,8 @@ grow_vertical = 2
 script = ExtResource("1_bpk53")
 game_stats = ExtResource("2_ghejw")
 
-[node name="SpaceBackground" parent="." instance=ExtResource("1_foupg")]
+[node name="SpaceBackground" parent="." instance=ExtResource("3_k3tv3")]
+layout_mode = 0
 
 [node name="VariablePitchAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_745o2")

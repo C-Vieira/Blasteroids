@@ -1,9 +1,9 @@
 [gd_scene load_steps=7 format=3 uid="uid://byt15cbwnm5jt"]
 
-[ext_resource type="PackedScene" uid="uid://dvd15yhwgkyg2" path="res://assets/effects/backgrounds/space_background.tscn" id="1_chh4x"]
 [ext_resource type="Script" path="res://ui/title/menu.gd" id="1_jb2c1"]
 [ext_resource type="FontFile" uid="uid://b5526cms3egpi" path="res://assets/fonts/pixel_font.ttf" id="2_1piqx"]
 [ext_resource type="Texture2D" uid="uid://h2dsajyr7hfo" path="res://assets/title.png" id="2_bgspq"]
+[ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="2_hs76v"]
 [ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="5_globt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h5y5t"]
@@ -18,7 +18,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_jb2c1")
 
-[node name="SpaceBackground" parent="." instance=ExtResource("1_chh4x")]
+[node name="SpaceBackground" parent="." instance=ExtResource("2_hs76v")]
+layout_mode = 0
 
 [node name="CenterContainer" type="CenterContainer" parent="."]
 layout_mode = 1
