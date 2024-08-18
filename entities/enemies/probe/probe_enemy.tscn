@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://cejune0c8ro42"]
+
+[ext_resource type="PackedScene" uid="uid://c2suqlvjf5qnb" path="res://entities/enemies/template/enemy.tscn" id="1_231ms"]
+[ext_resource type="Texture2D" uid="uid://5ej11a4ap45a" path="res://entities/enemies/probe/art/probe_enemy-move.png" id="2_235ul"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1f04"]
+atlas = ExtResource("2_235ul")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_084ci"]
+atlas = ExtResource("2_235ul")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p4gix"]
+atlas = ExtResource("2_235ul")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_co2tk"]
+atlas = ExtResource("2_235ul")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nqovt"]
+atlas = ExtResource("2_235ul")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8aa1e"]
+atlas = ExtResource("2_235ul")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u7kpr"]
+atlas = ExtResource("2_235ul")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1shui"]
+atlas = ExtResource("2_235ul")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4jvhu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1f04")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_084ci")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p4gix")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_co2tk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nqovt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8aa1e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u7kpr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1shui")
+}],
+"loop": true,
+"name": &"move",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nhkfh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tc300"]
+radius = 7.0
+
+[node name="ProbeEnemy" instance=ExtResource("1_231ms")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_4jvhu")
+animation = &"move"
+autoplay = "move"
+frame_progress = 0.625608
+
+[node name="StatsComponent" parent="." index="1"]
+health = 4
+
+[node name="MoveComponent" parent="." index="2"]
+speed = 40
+direction = Vector2(0, 1)
+
+[node name="VisibleOnScreenNotifier2D" parent="." index="3"]
+position = Vector2(-0.5, 0)
+scale = Vector2(0.45, 0.4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
+shape = SubResource("CircleShape2D_nhkfh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent" index="0"]
+shape = SubResource("CircleShape2D_tc300")

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cawdyfpfsyjw2" path="res://entities/asteroid/asteroid.tscn" id="3_iodk6"]
 [ext_resource type="PackedScene" uid="uid://beytn8q2nwr4b" path="res://game/generators/asteroids/asteroid_generator.tscn" id="3_jq5jg"]
 [ext_resource type="PackedScene" uid="uid://b85vdsbj4ljxd" path="res://game/generators/enemy/enemy_generator.tscn" id="5_5r86c"]
-[ext_resource type="PackedScene" uid="uid://d4hmo4bh1kw1t" path="res://entities/ufo/ufo_enemy.tscn" id="5_ojbvk"]
+[ext_resource type="PackedScene" uid="uid://cejune0c8ro42" path="res://entities/enemies/probe/probe_enemy.tscn" id="7_xfay4"]
 [ext_resource type="FontFile" uid="uid://b5526cms3egpi" path="res://assets/fonts/pixel_font.ttf" id="8_pc2yk"]
 [ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="8_rswq7"]
 [ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="10_j6iuf"]
@@ -26,7 +26,7 @@ position = Vector2(150, 124)
 AsteroidScene = ExtResource("3_iodk6")
 
 [node name="EnemyGenerator" parent="." instance=ExtResource("5_5r86c")]
-EnemyScene = ExtResource("5_ojbvk")
+EnemyScene = ExtResource("7_xfay4")
 
 [node name="SpaceBackground" parent="." instance=ExtResource("8_rswq7")]
 

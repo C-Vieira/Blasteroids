@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://d4hmo4bh1kw1t"]
 
-[ext_resource type="Script" path="res://entities/ufo/ufo_enemy.gd" id="1_fkiuj"]
+[ext_resource type="Script" path="res://entities/enemies/ufo/ufo_enemy.gd" id="1_fkiuj"]
 [ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_q25fm"]
 [ext_resource type="Texture2D" uid="uid://crw3fp322vk3b" path="res://entities/player/laser/art/asteroid_characters.png" id="2_xkp6f"]
 [ext_resource type="Script" path="res://components/MoveComponent.gd" id="3_hygfy"]

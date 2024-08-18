@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://components/MoveComponent.gd" id="3_nshfr"]
 [ext_resource type="Texture2D" uid="uid://ceby2gb6cfreu" path="res://entities/asteroid/art/asteroids.png" id="4_8bbxd"]
 [ext_resource type="Texture2D" uid="uid://b6d8sd0dknlk6" path="res://entities/asteroid/art/old_asteroids.png" id="4_ym5vp"]
-[ext_resource type="Texture2D" uid="uid://dvutqdujegquv" path="res://entities/asteroid/art/crystal_overlay.png" id="5_5bxnv"]
+[ext_resource type="Texture2D" uid="uid://c84313uc6ufbw" path="res://entities/asteroid/art/crystal_overlay.png" id="5_5bxnv"]
 [ext_resource type="Script" path="res://components/HurtComponent.gd" id="6_5fgha"]
 [ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_mx00i"]
 [ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="8_4t6oi"]
@@ -74,29 +74,29 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_i6kdb"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_axvbh"]
 atlas = ExtResource("5_5bxnv")
-region = Rect2(0, 0, 31, 32)
+region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_k1j37"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdqig"]
 atlas = ExtResource("5_5bxnv")
-region = Rect2(31, 0, 31, 32)
+region = Rect2(32, 0, 32, 32)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_c1jdp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_lf84c"]
 atlas = ExtResource("5_5bxnv")
-region = Rect2(62, 0, 31, 32)
+region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_n7hgl"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_i6kdb")
+"texture": SubResource("AtlasTexture_axvbh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_k1j37")
+"texture": SubResource("AtlasTexture_gdqig")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_c1jdp")
+"texture": SubResource("AtlasTexture_lf84c")
 }],
 "loop": true,
 "name": &"crystals",
