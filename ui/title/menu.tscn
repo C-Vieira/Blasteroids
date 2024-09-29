@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://h2dsajyr7hfo" path="res://assets/title.png" id="2_bgspq"]
 [ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="2_hs76v"]
 [ext_resource type="PackedScene" uid="uid://b7d4bvm5uv7i7" path="res://assets/effects/backgrounds/tech_lines/tech_lines_background.tscn" id="3_w025d"]
-[ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="5_globt"]
+[ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/crt/crt_effect.tscn" id="5_globt"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_h5y5t"]
 font = ExtResource("2_1piqx")
@@ -56,4 +56,3 @@ label_settings = SubResource("LabelSettings_h5y5t")
 horizontal_alignment = 1
 
 [node name="CRTEffect" parent="." instance=ExtResource("5_globt")]
-visible = false

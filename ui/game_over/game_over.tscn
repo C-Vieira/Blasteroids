@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://caao74rs3ilpv" path="res://entities/player/sounds/lose/lose.wav" id="3_745o2"]
 [ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="3_k3tv3"]
 [ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="4_h07xj"]
-[ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="7_jtajy"]
+[ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/crt/crt_effect.tscn" id="7_jtajy"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_lktxc"]
 font = ExtResource("2_wrgwn")
@@ -73,4 +73,3 @@ label_settings = SubResource("LabelSettings_4gjeg")
 horizontal_alignment = 1
 
 [node name="CRTEffect" parent="." instance=ExtResource("7_jtajy")]
-visible = false
