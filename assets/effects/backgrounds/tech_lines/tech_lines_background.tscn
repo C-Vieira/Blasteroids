@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://b7d4bvm5uv7i7"]
+
+[ext_resource type="Shader" path="res://assets/effects/shaders/gradient_shift/gradient_shift.gdshader" id="1_texap"]
+[ext_resource type="Texture2D" uid="uid://codplggwqtm5t" path="res://assets/effects/backgrounds/tech_lines/art/green_gradient.png" id="2_saqug"]
+[ext_resource type="Texture2D" uid="uid://p3a8vj2q20xi" path="res://assets/effects/backgrounds/tech_lines/art/tech_lines_background.png" id="3_pgsgt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_76u67"]
+shader = ExtResource("1_texap")
+shader_parameter/speed_scale = 0.2
+shader_parameter/gradient = ExtResource("2_saqug")
+
+[node name="TechLinesBackground" type="TextureRect"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_76u67")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_pgsgt")

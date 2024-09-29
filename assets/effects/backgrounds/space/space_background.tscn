@@ -5,8 +5,17 @@
 [ext_resource type="PackedScene" uid="uid://dvd15yhwgkyg2" path="res://assets/effects/backgrounds/stars/stars_background.tscn" id="3_pekif"]
 
 [node name="SpaceBackground" type="SubViewportContainer"]
-offset_right = 320.0
-offset_bottom = 240.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -120.0
+offset_right = 160.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false

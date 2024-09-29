@@ -11,5 +11,3 @@ func _ready():
 func destroy():
 	destroyed_effect_spawner_component.spawn(actor.global_position)
 	actor.queue_free()
-
-

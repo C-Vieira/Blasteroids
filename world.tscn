@@ -1,26 +1,20 @@
-[gd_scene load_steps=12 format=3 uid="uid://bw87fnf3n4w3"]
+[gd_scene load_steps=10 format=3 uid="uid://bw87fnf3n4w3"]
 
 [ext_resource type="Script" path="res://world.gd" id="1_8gclr"]
 [ext_resource type="PackedScene" uid="uid://bj0csrpwvuve7" path="res://entities/player/player.tscn" id="1_vv7f7"]
-[ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game/resources/score/game_stats.tres" id="2_2pals"]
 [ext_resource type="PackedScene" uid="uid://cawdyfpfsyjw2" path="res://entities/asteroid/asteroid.tscn" id="3_iodk6"]
 [ext_resource type="PackedScene" uid="uid://beytn8q2nwr4b" path="res://game/generators/asteroids/asteroid_generator.tscn" id="3_jq5jg"]
 [ext_resource type="PackedScene" uid="uid://b85vdsbj4ljxd" path="res://game/generators/enemy/enemy_generator.tscn" id="5_5r86c"]
 [ext_resource type="PackedScene" uid="uid://cejune0c8ro42" path="res://entities/enemies/probe/probe_enemy.tscn" id="7_xfay4"]
-[ext_resource type="FontFile" uid="uid://b5526cms3egpi" path="res://assets/fonts/pixel_font.ttf" id="8_pc2yk"]
 [ext_resource type="PackedScene" uid="uid://bk4ll1jiev1lr" path="res://assets/effects/backgrounds/space/space_background.tscn" id="8_rswq7"]
+[ext_resource type="PackedScene" uid="uid://yn70nb8njmmj" path="res://ui/hud/hud.tscn" id="9_83www"]
 [ext_resource type="PackedScene" uid="uid://bhuw7e3s6ju2e" path="res://assets/effects/shaders/old_crt/old_crt_effect.tscn" id="10_j6iuf"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_7kt05"]
-font = ExtResource("8_pc2yk")
-font_size = 8
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_8gclr")
-game_stats = ExtResource("2_2pals")
 
 [node name="Player" parent="." instance=ExtResource("1_vv7f7")]
-position = Vector2(150, 124)
+position = Vector2(214, 191)
 
 [node name="AsteroidGenerator" parent="." instance=ExtResource("3_jq5jg")]
 AsteroidScene = ExtResource("3_iodk6")
@@ -28,16 +22,13 @@ AsteroidScene = ExtResource("3_iodk6")
 [node name="EnemyGenerator" parent="." instance=ExtResource("5_5r86c")]
 EnemyScene = ExtResource("7_xfay4")
 
-[node name="SpaceBackground" parent="." instance=ExtResource("8_rswq7")]
+[node name="Background" type="Node" parent="."]
 
-[node name="ScoreLabel" type="Label" parent="."]
-texture_filter = 1
-offset_left = 4.0
-offset_top = 226.0
-offset_right = 71.0
-offset_bottom = 249.0
-text = "score: "
-label_settings = SubResource("LabelSettings_7kt05")
+[node name="SpaceBackground" parent="Background" instance=ExtResource("8_rswq7")]
+z_index = -10
+metadata/_edit_lock_ = true
+
+[node name="HUD" parent="." instance=ExtResource("9_83www")]
 
 [node name="CRTEffect" parent="." instance=ExtResource("10_j6iuf")]
 visible = false

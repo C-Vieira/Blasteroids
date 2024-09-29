@@ -1,0 +1,74 @@
+[gd_scene load_steps=4 format=3 uid="uid://yn70nb8njmmj"]
+
+[ext_resource type="Theme" uid="uid://cod60p8k3t11h" path="res://ui/game_theme.tres" id="1_83bkh"]
+[ext_resource type="Script" path="res://ui/hud/hud.gd" id="1_sgx2p"]
+[ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game/resources/score/game_stats.tres" id="2_ixjb4"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_sgx2p")
+game_stats = ExtResource("2_ixjb4")
+
+[node name="LeftPanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 72.0
+grow_vertical = 2
+theme = ExtResource("1_83bkh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftPanelContainer"]
+layout_mode = 2
+
+[node name="HealthLabel" type="Label" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "HP: "
+
+[node name="ScoreLabel" type="Label" parent="LeftPanelContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "XP: "
+
+[node name="Spacer" type="Control" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LevelLabel" type="Label" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "LVL: "
+
+[node name="DamageLabel" type="Label" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "DMG: "
+
+[node name="FirePowerLabel" type="Label" parent="LeftPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "FPW: "
+
+[node name="RightPanelContainer" type="PanelContainer" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -72.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 8
+theme = ExtResource("1_83bkh")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="RightPanelContainer"]
+layout_mode = 2
+
+[node name="TimerLabel" type="Label" parent="RightPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "TIME: 240"
+
+[node name="Spacer" type="Control" parent="RightPanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Spacer2" type="Control" parent="RightPanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="StageLabel" type="Label" parent="RightPanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "STG: 1-1"
