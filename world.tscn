@@ -14,7 +14,7 @@
 script = ExtResource("1_8gclr")
 
 [node name="Player" parent="." instance=ExtResource("1_vv7f7")]
-position = Vector2(214, 191)
+position = Vector2(159, 199)
 
 [node name="AsteroidGenerator" parent="." instance=ExtResource("3_jq5jg")]
 AsteroidScene = ExtResource("3_iodk6")

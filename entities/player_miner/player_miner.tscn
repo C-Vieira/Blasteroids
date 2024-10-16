@@ -1,0 +1,85 @@
+[gd_scene load_steps=13 format=3 uid="uid://ctyxuxysfj3xe"]
+
+[ext_resource type="Script" path="res://entities/player_miner/player_miner.gd" id="1_4gwhr"]
+[ext_resource type="Texture2D" uid="uid://dn20rbcfvhdlx" path="res://assets/miner_ship.png" id="1_xcowe"]
+[ext_resource type="Texture2D" uid="uid://ci4wibc7pkhgx" path="res://assets/miner_ship_drill.png" id="2_p7agf"]
+[ext_resource type="Texture2D" uid="uid://cu5u7e0av3k87" path="res://assets/ship_booster.png" id="4_ulhgb"]
+[ext_resource type="Script" path="res://components/ShakeComponent.gd" id="5_b00jq"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="6_6js0u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lowyq"]
+atlas = ExtResource("4_ulhgb")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mkhxo"]
+atlas = ExtResource("4_ulhgb")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_khvcd"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lowyq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mkhxo")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2rwtb"]
+radius = 4.0
+height = 14.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_385a7"]
+radius = 3.57812
+height = 9.78978
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_agopy"]
+radius = 9.0
+
+[node name="Player" type="CharacterBody2D"]
+z_index = 5
+script = ExtResource("1_4gwhr")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
+
+[node name="ShipSprite" type="Sprite2D" parent="."]
+texture = ExtResource("1_xcowe")
+
+[node name="ShipDrill" type="Sprite2D" parent="."]
+texture = ExtResource("2_p7agf")
+
+[node name="ShipBooster" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, 15)
+sprite_frames = SubResource("SpriteFrames_khvcd")
+animation = &"idle"
+autoplay = "idle"
+frame_progress = 0.342458
+
+[node name="DrillShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("5_b00jq")
+node = NodePath("../ShipDrill")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.474438, 1)
+shape = SubResource("CapsuleShape2D_2rwtb")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("6_6js0u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0.421883, -7.89489)
+shape = SubResource("CapsuleShape2D_385a7")
+disabled = true
+
+[node name="CollectionArea" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectionArea"]
+shape = SubResource("CircleShape2D_agopy")

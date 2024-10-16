@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://brjkiokejuffb"]
+
+[ext_resource type="Script" path="res://level.gd" id="1_cihwd"]
+[ext_resource type="PackedScene" uid="uid://buqwgd21dytfx" path="res://game/generators/level/level_generator.tscn" id="1_r2avm"]
+[ext_resource type="PackedScene" uid="uid://ctyxuxysfj3xe" path="res://entities/player_miner/player_miner.tscn" id="2_hmnva"]
+[ext_resource type="Script" path="res://entities/player_miner/player_camera_2d.gd" id="3_iougr"]
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_cihwd")
+
+[node name="LevelGenerator" parent="." instance=ExtResource("1_r2avm")]
+
+[node name="PlayerCamera2D" type="Camera2D" parent="."]
+position = Vector2(152, 125)
+position_smoothing_enabled = true
+script = ExtResource("3_iougr")
+
+[node name="Player" parent="." instance=ExtResource("2_hmnva")]
+position = Vector2(152, 125)
+
+[node name="RemoteTransform2D" parent="Player" index="0"]
+remote_path = NodePath("../../PlayerCamera2D")
+
+[editable path="Player"]

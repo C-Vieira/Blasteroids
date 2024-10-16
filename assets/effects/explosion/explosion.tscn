@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cf1ag78h5qbjy"]
+[gd_scene load_steps=7 format=3 uid="uid://cf1ag78h5qbjy"]
 
 [ext_resource type="Script" path="res://assets/effects/explosion/explosion.gd" id="1_irann"]
 [ext_resource type="Texture2D" uid="uid://dsf7qcsxoksxn" path="res://entities/asteroid/art/stone_bits.png" id="2_wtyq6"]
+[ext_resource type="AudioStream" uid="uid://cyoorg8b8nl6b" path="res://assets/effects/explosion/destroy_alt.wav" id="3_h3neo"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="4_q312q"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2veon"]
 atlas = ExtResource("2_wtyq6")
@@ -25,3 +27,8 @@ gravity = Vector2(0, 0)
 initial_velocity_min = 50.0
 initial_velocity_max = 100.0
 scale_amount_curve = SubResource("Curve_57i4x")
+
+[node name="DestroyedAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_h3neo")
+script = ExtResource("4_q312q")
+auto_play_with_variance = true
