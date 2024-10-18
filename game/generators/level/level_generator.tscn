@@ -1,18 +1,52 @@
-[gd_scene load_steps=17 format=4 uid="uid://buqwgd21dytfx"]
+[gd_scene load_steps=32 format=4 uid="uid://buqwgd21dytfx"]
 
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/noise_generator/noise_generator.gd" id="1_pkx3v"]
 [ext_resource type="Script" path="res://game/generators/level/level_generator.gd" id="1_qrcvw"]
-[ext_resource type="PackedScene" uid="uid://nbqyp4c4x3g1" path="res://entities/tile_entities/debris_tile.tscn" id="1_wo5yf"]
 [ext_resource type="Script" path="res://addons/gaea/renderers/2D/tilemap_gaea_renderer.gd" id="2_jx6g7"]
 [ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_kpidj"]
+[ext_resource type="Script" path="res://entities/tile_entities/template/tile_entity.gd" id="2_qe6oj"]
 [ext_resource type="Script" path="res://addons/gaea/modifiers/2D/modifier_2d.gd" id="2_r1gxy"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_settings.gd" id="3_dov06"]
 [ext_resource type="Script" path="res://addons/gaea/generators/2D/noise_generator/noise_generator_data.gd" id="4_2rypm"]
+[ext_resource type="Script" path="res://components/StatsComponent.gd" id="4_t4ku8"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="5_5ex45"]
+[ext_resource type="Script" path="res://components/HurtComponent.gd" id="6_funvb"]
 [ext_resource type="Script" path="res://addons/gaea/tile_info/tilemap_tile_info.gd" id="6_xgnne"]
+[ext_resource type="Script" path="res://components/ShakeComponent.gd" id="7_6s62d"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="8_hwlpj"]
+[ext_resource type="Script" path="res://components/FlashComponent.gd" id="9_g5kss"]
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="10_8do8a"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="11_vq6v8"]
+[ext_resource type="Script" path="res://components/DestroyedComponent.gd" id="12_nbvuw"]
+[ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="13_bgpij"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="14_vcsr4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vb85e"]
+atlas = ExtResource("2_kpidj")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4lx1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnomm"]
+size = Vector2(16, 16)
+
+[sub_resource type="PackedScene" id="PackedScene_lrhhh"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("DebrisTile", "script", "Node2D", "Sprite2D", "z_index", "texture", "StaticBody2D", "CollisionShape2D", "shape", "StatsComponent", "Node", "HurtboxComponent", "collision_layer", "collision_mask", "Area2D", "HurtComponent", "stats_component", "hurt_box_component", "ShakeComponent", "node", "ScaleComponent", "sprite", "FlashComponent", "DestroyedSpawnerComponent", "scene", "DestroyedComponent", "actor", "destroyed_effect_spawner_component", "HurtAudioStreamPlayer", "stream", "AudioStreamPlayer"),
+"node_count": 14,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 2, 0, -1, 1, 1, 0, 0, 0, 0, 3, 3, -1, 2, 4, 1, 5, 2, 0, 0, 0, 6, 6, -1, 0, 0, 2, 0, 7, 7, -1, 1, 8, 3, 0, 0, 0, 10, 9, -1, 1, 1, 4, 0, 0, 0, 14, 11, -1, 3, 12, 1, 13, 5, 1, 6, 0, 5, 0, 7, 7, -1, 1, 8, 7, 0, 0, 0, 10, 15, -1, 3, 1, 8, 1073741840, 9, 1073741841, 10, 0, 0, 0, 10, 18, -1, 2, 1, 11, 1073741843, 12, 0, 0, 0, 10, 20, -1, 2, 1, 13, 1073741845, 12, 0, 0, 0, 10, 22, -1, 2, 1, 14, 1073741845, 12, 0, 0, 0, 10, 23, -1, 2, 1, 15, 24, 16, 0, 0, 0, 10, 25, -1, 4, 1, 17, 1073741850, 18, 1073741840, 9, 1073741851, 19, 0, 0, 0, 30, 28, -1, 2, 29, 20, 1, 21, 0),
+"variants": [ExtResource("2_qe6oj"), 2, SubResource("AtlasTexture_vb85e"), SubResource("RectangleShape2D_c4lx1"), ExtResource("4_t4ku8"), 0, ExtResource("5_5ex45"), SubResource("RectangleShape2D_jnomm"), ExtResource("6_funvb"), NodePath("../StatsComponent"), NodePath("../HurtboxComponent"), ExtResource("7_6s62d"), NodePath("../Sprite2D"), ExtResource("8_hwlpj"), ExtResource("9_g5kss"), ExtResource("10_8do8a"), ExtResource("11_vq6v8"), ExtResource("12_nbvuw"), NodePath(".."), NodePath("../DestroyedSpawnerComponent"), ExtResource("13_bgpij"), ExtResource("14_vcsr4")],
+"version": 3
+}
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_t32ne"]
 resource_name = "debris"
-scenes/1/scene = ExtResource("1_wo5yf")
+scenes/1/scene = SubResource("PackedScene_lrhhh")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_150wl"]
 texture = ExtResource("2_kpidj")

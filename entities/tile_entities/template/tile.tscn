@@ -1,0 +1,69 @@
+[gd_scene load_steps=13 format=3 uid="uid://i5pn70cdk2pi"]
+
+[ext_resource type="Script" path="res://entities/tile_entities/template/tile_entity.gd" id="1_jksk6"]
+[ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_mfy2n"]
+[ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="3_dx3mi"]
+[ext_resource type="Script" path="res://components/HurtComponent.gd" id="4_rxr8k"]
+[ext_resource type="Script" path="res://components/ShakeComponent.gd" id="5_3icfa"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="6_kvkcj"]
+[ext_resource type="Script" path="res://components/FlashComponent.gd" id="7_fd1fv"]
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="8_v8rgx"]
+[ext_resource type="Script" path="res://components/DestroyedComponent.gd" id="9_nw3wu"]
+[ext_resource type="Script" path="res://components/variable_pitch_audio_stream_player.gd" id="10_rwqnw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c4lx1"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jnomm"]
+size = Vector2(16, 16)
+
+[node name="Tile" type="Node2D"]
+script = ExtResource("1_jksk6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 2
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_c4lx1")
+
+[node name="StatsComponent" type="Node" parent="."]
+script = ExtResource("2_mfy2n")
+
+[node name="HurtboxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+script = ExtResource("3_dx3mi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_jnomm")
+
+[node name="HurtComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurt_box_component")]
+script = ExtResource("4_rxr8k")
+stats_component = NodePath("../StatsComponent")
+hurt_box_component = NodePath("../HurtboxComponent")
+
+[node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
+script = ExtResource("5_3icfa")
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("6_kvkcj")
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("7_fd1fv")
+sprite = NodePath("../Sprite2D")
+
+[node name="DestroyedSpawnerComponent" type="Node" parent="."]
+script = ExtResource("8_v8rgx")
+
+[node name="DestroyedComponent" type="Node" parent="." node_paths=PackedStringArray("actor", "stats_component", "destroyed_effect_spawner_component")]
+script = ExtResource("9_nw3wu")
+actor = NodePath("..")
+stats_component = NodePath("../StatsComponent")
+destroyed_effect_spawner_component = NodePath("../DestroyedSpawnerComponent")
+
+[node name="HurtAudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+script = ExtResource("10_rwqnw")

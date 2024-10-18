@@ -2,7 +2,7 @@ extends Node
 
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
-var debris_tile = preload("res://entities/tile_entities/debris_tile.tscn")
+var debris_tile = preload("res://entities/tile_entities/debris/debris_tile.tscn")
 
 func _on_noise_generator_generation_finished():
 	var map :Rect2i = tile_map_layer.get_used_rect()
