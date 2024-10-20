@@ -20,7 +20,7 @@ size = Vector2(16, 16)
 [node name="Tile" type="Node2D"]
 script = ExtResource("1_jksk6")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 z_index = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
@@ -46,15 +46,15 @@ hurt_box_component = NodePath("../HurtboxComponent")
 
 [node name="ShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("5_3icfa")
-node = NodePath("../Sprite2D")
+node = NodePath("")
 
 [node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("6_kvkcj")
-sprite = NodePath("../Sprite2D")
+sprite = NodePath("")
 
 [node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("7_fd1fv")
-sprite = NodePath("../Sprite2D")
+sprite = NodePath("")
 
 [node name="DestroyedSpawnerComponent" type="Node" parent="."]
 script = ExtResource("8_v8rgx")

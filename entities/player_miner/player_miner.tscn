@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ctyxuxysfj3xe"]
+[gd_scene load_steps=18 format=3 uid="uid://ctyxuxysfj3xe"]
 
 [ext_resource type="Script" path="res://entities/player_miner/player_miner.gd" id="1_4gwhr"]
 [ext_resource type="Texture2D" uid="uid://dn20rbcfvhdlx" path="res://assets/miner_ship.png" id="1_xcowe"]
@@ -6,6 +6,42 @@
 [ext_resource type="Texture2D" uid="uid://cu5u7e0av3k87" path="res://assets/ship_booster.png" id="4_ulhgb"]
 [ext_resource type="Script" path="res://components/ShakeComponent.gd" id="5_b00jq"]
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id="6_6js0u"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6cehm"]
+atlas = ExtResource("1_xcowe")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bewov"]
+atlas = ExtResource("1_xcowe")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d0w70"]
+atlas = ExtResource("1_xcowe")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r0g0a"]
+atlas = ExtResource("1_xcowe")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_g8vgf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6cehm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bewov")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d0w70")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r0g0a")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lowyq"]
 atlas = ExtResource("4_ulhgb")
@@ -46,25 +82,25 @@ script = ExtResource("1_4gwhr")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="."]
 
-[node name="ShipSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_xcowe")
+[node name="ShipSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_g8vgf")
 
 [node name="ShipDrill" type="Sprite2D" parent="."]
 texture = ExtResource("2_p7agf")
+offset = Vector2(0, -5)
 
 [node name="ShipBooster" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, 15)
+position = Vector2(-1, 16)
 sprite_frames = SubResource("SpriteFrames_khvcd")
 animation = &"idle"
 autoplay = "idle"
-frame_progress = 0.342458
 
 [node name="DrillShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("5_b00jq")
 node = NodePath("../ShipDrill")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.474438, 1)
+position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_2rwtb")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
@@ -73,7 +109,7 @@ collision_mask = 2
 script = ExtResource("6_6js0u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0.421883, -7.89489)
+position = Vector2(0, -8)
 shape = SubResource("CapsuleShape2D_385a7")
 disabled = true
 

@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://d3o0lmuac0h88"]
+
+[ext_resource type="PackedScene" uid="uid://i5pn70cdk2pi" path="res://entities/tile_entities/template/tile.tscn" id="1_pdexl"]
+[ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_j0vsb"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="3_vory8"]
+[ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="4_uen4g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32co4"]
+atlas = ExtResource("2_j0vsb")
+region = Rect2(48, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_crcqe"]
+atlas = ExtResource("2_j0vsb")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r6knb"]
+atlas = ExtResource("2_j0vsb")
+region = Rect2(80, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ek1sf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32co4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_crcqe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r6knb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="RegolithTile" instance=ExtResource("1_pdexl")]
+
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ek1sf")
+
+[node name="StatsComponent" parent="." index="2"]
+health = 3
+
+[node name="ShakeComponent" parent="." index="5" node_paths=PackedStringArray("node")]
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" parent="." index="6" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." index="7" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="DestroyedSpawnerComponent" parent="." index="8"]
+scene = ExtResource("3_vory8")
+
+[node name="HurtAudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("4_uen4g")

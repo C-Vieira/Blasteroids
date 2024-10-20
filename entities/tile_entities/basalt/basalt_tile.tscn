@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://dpi2rdv2tdhfl"]
+
+[ext_resource type="PackedScene" uid="uid://i5pn70cdk2pi" path="res://entities/tile_entities/template/tile.tscn" id="1_mgr14"]
+[ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_rh4x6"]
+[ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="3_185kg"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="3_pjs6r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gx8ph"]
+atlas = ExtResource("2_rh4x6")
+region = Rect2(48, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qi1yn"]
+atlas = ExtResource("2_rh4x6")
+region = Rect2(64, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xkbhq"]
+atlas = ExtResource("2_rh4x6")
+region = Rect2(80, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ptobq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gx8ph")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qi1yn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xkbhq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="BasaltTile" instance=ExtResource("1_mgr14")]
+
+[node name="Sprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_ptobq")
+
+[node name="StatsComponent" parent="." index="2"]
+health = 5
+
+[node name="ShakeComponent" parent="." index="5" node_paths=PackedStringArray("node")]
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" parent="." index="6" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." index="7" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="DestroyedSpawnerComponent" parent="." index="8"]
+scene = ExtResource("3_pjs6r")
+
+[node name="HurtAudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("3_185kg")

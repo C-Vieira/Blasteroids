@@ -1,21 +1,41 @@
-[gd_scene load_steps=6 format=3 uid="uid://vio87in4sg4t"]
+[gd_scene load_steps=7 format=3 uid="uid://vio87in4sg4t"]
 
 [ext_resource type="PackedScene" uid="uid://i5pn70cdk2pi" path="res://entities/tile_entities/template/tile.tscn" id="1_dlw21"]
-[ext_resource type="Texture2D" uid="uid://mw5py2h3ofx" path="res://assets/tiles2.png" id="2_x7vwk"]
+[ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_cmb8f"]
 [ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="3_ekn1a"]
 [ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="4_xn4ed"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dup8b"]
-atlas = ExtResource("2_x7vwk")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xh0x"]
+atlas = ExtResource("2_cmb8f")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5ksh4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xh0x")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="HardTile" instance=ExtResource("1_dlw21")]
 
 [node name="Sprite2D" parent="." index="0"]
-texture = SubResource("AtlasTexture_dup8b")
+sprite_frames = SubResource("SpriteFrames_5ksh4")
 
 [node name="StatsComponent" parent="." index="2"]
-health = 10
+health = 8
+
+[node name="ShakeComponent" parent="." index="5" node_paths=PackedStringArray("node")]
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" parent="." index="6" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." index="7" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
 
 [node name="DestroyedSpawnerComponent" parent="." index="8"]
 scene = ExtResource("3_ekn1a")

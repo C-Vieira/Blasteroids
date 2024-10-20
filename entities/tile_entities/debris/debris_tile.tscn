@@ -1,18 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccacfp6vlimhl"]
+[gd_scene load_steps=7 format=3 uid="uid://ccacfp6vlimhl"]
 
 [ext_resource type="PackedScene" uid="uid://i5pn70cdk2pi" path="res://entities/tile_entities/template/tile.tscn" id="1_qonoj"]
 [ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_i71ew"]
 [ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="9_rd1on"]
 [ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="11_vj6ff"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_gkyix"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_yur15"]
 atlas = ExtResource("2_i71ew")
 region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_w4ceb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yur15")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="DebrisTile" instance=ExtResource("1_qonoj")]
 
 [node name="Sprite2D" parent="." index="0"]
-texture = SubResource("AtlasTexture_gkyix")
+sprite_frames = SubResource("SpriteFrames_w4ceb")
+
+[node name="ShakeComponent" parent="." index="5" node_paths=PackedStringArray("node")]
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" parent="." index="6" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." index="7" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
 
 [node name="DestroyedSpawnerComponent" parent="." index="8"]
 scene = ExtResource("9_rd1on")

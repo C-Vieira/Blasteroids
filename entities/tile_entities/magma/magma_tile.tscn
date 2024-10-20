@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://4gbj48xxes5y"]
+
+[ext_resource type="PackedScene" uid="uid://i5pn70cdk2pi" path="res://entities/tile_entities/template/tile.tscn" id="1_kx52e"]
+[ext_resource type="Texture2D" uid="uid://c1cd73rf3aw1w" path="res://assets/tiles.png" id="2_jgeyl"]
+[ext_resource type="Shader" path="res://assets/effects/shaders/gradient_shift/gradient_shift.gdshader" id="2_uhy0j"]
+[ext_resource type="Texture2D" uid="uid://dc6ck4vp5xben" path="res://assets/mantle_gradient.png" id="3_da6jd"]
+[ext_resource type="PackedScene" uid="uid://cf1ag78h5qbjy" path="res://assets/effects/explosion/explosion.tscn" id="5_46rxk"]
+[ext_resource type="AudioStream" uid="uid://d1g8cds3g04up" path="res://entities/tile_entities/debris/sounds/hurt.wav" id="6_175ld"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yh5ge"]
+shader = ExtResource("2_uhy0j")
+shader_parameter/speed_scale = 0.1
+shader_parameter/gradient = ExtResource("3_da6jd")
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xm5s2"]
+atlas = ExtResource("2_jgeyl")
+region = Rect2(48, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v6oif"]
+atlas = ExtResource("2_jgeyl")
+region = Rect2(64, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lee04"]
+atlas = ExtResource("2_jgeyl")
+region = Rect2(80, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ecssy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xm5s2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v6oif")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lee04")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MagmaTile" instance=ExtResource("1_kx52e")]
+
+[node name="Sprite2D" parent="." index="0"]
+material = SubResource("ShaderMaterial_yh5ge")
+sprite_frames = SubResource("SpriteFrames_ecssy")
+
+[node name="StatsComponent" parent="." index="2"]
+health = 8
+
+[node name="ShakeComponent" parent="." index="5" node_paths=PackedStringArray("node")]
+node = NodePath("../Sprite2D")
+
+[node name="ScaleComponent" parent="." index="6" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="FlashComponent" parent="." index="7" node_paths=PackedStringArray("sprite")]
+sprite = NodePath("../Sprite2D")
+
+[node name="DestroyedSpawnerComponent" parent="." index="8"]
+scene = ExtResource("5_46rxk")
+
+[node name="HurtAudioStreamPlayer" parent="." index="10"]
+stream = ExtResource("6_175ld")
