@@ -87,7 +87,7 @@ sprite_frames = SubResource("SpriteFrames_g8vgf")
 
 [node name="ShipDrill" type="Sprite2D" parent="."]
 texture = ExtResource("2_p7agf")
-offset = Vector2(0, -5)
+offset = Vector2(0, -6)
 
 [node name="ShipBooster" type="AnimatedSprite2D" parent="."]
 position = Vector2(-1, 16)

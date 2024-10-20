@@ -27,6 +27,7 @@ scale = Vector2(0.943476, 1)
 shape = SubResource("CircleShape2D_q850k")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 15
 texture = SubResource("AtlasTexture_txv61")
 
 [node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]

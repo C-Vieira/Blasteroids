@@ -5,6 +5,9 @@ extends Node
 @onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
 var map: Rect2i
+
+var crystal_scene = preload("res://entities/crystal/crystal.tscn")
+
 var debris_tile: PackedScene = preload("res://entities/tile_entities/debris/debris_tile.tscn")
 var regolith_tile: PackedScene = preload("res://entities/tile_entities/regolith/regolith_tile.tscn")
 var basalt_tile: PackedScene = preload("res://entities/tile_entities/basalt/basalt_tile.tscn")
@@ -25,6 +28,9 @@ func _on_noise_generator_generation_finished() -> void:
 				get_tree().current_scene.add_child(new_tile)
 			if cell == Vector2i(1, 0): #Spawn Regolith tiles on ground
 				var new_tile: Node2D = regolith_tile.instantiate()
+				
+				new_tile.destroyed.connect(_on_regolith_tile_destroyed) #Connect on_destroyed signal
+				
 				new_tile.global_position = tile_map_layer.map_to_local(Vector2i(x, y))
 				get_tree().current_scene.add_child(new_tile)
 			if cell == Vector2i(2, 0): #Spawn Basalt tiles on ground
@@ -58,3 +64,12 @@ func spawn_rooms() -> void:
 					var new_tile: Node2D = hard_tile.instantiate()
 					new_tile.global_position = tile_map_layer.map_to_local(Vector2i(start_pos.x + x, start_pos.y + y))
 					get_tree().current_scene.add_child(new_tile)
+
+func _on_regolith_tile_destroyed(pos, had_crystals):
+	if had_crystals:
+		spawn_crystal(pos)
+
+func spawn_crystal(pos):
+	var crystal = crystal_scene.instantiate()
+	crystal.global_position = pos
+	get_tree().current_scene.add_child(crystal)
