@@ -1,13 +1,14 @@
+class_name RegolithTileEntity
 extends TileEntity
 
-signal destroyed(pos, had_crytals)
+signal destroyed(pos: Vector2, had_crytals: bool)
 
-var has_crystals
+var has_crystals: bool
 
 @onready var crystal_sprite: Sprite2D = $CrystalSprite
 
 func _ready() -> void:
-	hurtbox_component.hurt.connect(func(hitbox : HitboxComponent):
+	hurtbox_component.hurt.connect(func(_hitbox : HitboxComponent) -> void:
 		hurt_audio_stream_player.play_with_variance()
 		shake_component.tween_shake()
 		flash_component.flash()
@@ -20,5 +21,5 @@ func _ready() -> void:
 	if has_crystals:
 		crystal_sprite.visible = true
 
-func tile_destroyed():
+func tile_destroyed() -> void:
 	destroyed.emit(global_position, has_crystals)
