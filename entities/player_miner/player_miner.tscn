@@ -1,11 +1,19 @@
-[gd_scene load_steps=18 format=3 uid="uid://ctyxuxysfj3xe"]
+[gd_scene load_steps=23 format=3 uid="uid://ctyxuxysfj3xe"]
 
 [ext_resource type="Script" path="res://entities/player_miner/player_miner.gd" id="1_4gwhr"]
 [ext_resource type="Texture2D" uid="uid://dn20rbcfvhdlx" path="res://assets/miner_ship.png" id="1_xcowe"]
+[ext_resource type="Texture2D" uid="uid://2anvjb80jpuq" path="res://assets/player_ship2.png" id="2_hrkse"]
 [ext_resource type="Texture2D" uid="uid://ci4wibc7pkhgx" path="res://assets/miner_ship_drill.png" id="2_p7agf"]
 [ext_resource type="Texture2D" uid="uid://cu5u7e0av3k87" path="res://assets/ship_booster.png" id="4_ulhgb"]
 [ext_resource type="Script" path="res://components/ShakeComponent.gd" id="5_b00jq"]
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id="6_6js0u"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="7_iurph"]
+[ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_sbuvn"]
+[ext_resource type="PackedScene" uid="uid://cyckrkweqnvss" path="res://entities/player/laser/laser.tscn" id="8_y3jeo"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ldu0"]
+atlas = ExtResource("2_hrkse")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6cehm"]
 atlas = ExtResource("1_xcowe")
@@ -26,6 +34,9 @@ region = Rect2(48, 0, 16, 16)
 [sub_resource type="SpriteFrames" id="SpriteFrames_g8vgf"]
 animations = [{
 "frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ldu0")
+}, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_6cehm")
 }, {
@@ -86,10 +97,12 @@ script = ExtResource("1_4gwhr")
 sprite_frames = SubResource("SpriteFrames_g8vgf")
 
 [node name="ShipDrill" type="Sprite2D" parent="."]
+visible = false
 texture = ExtResource("2_p7agf")
 offset = Vector2(0, -6)
 
 [node name="ShipBooster" type="AnimatedSprite2D" parent="."]
+visible = false
 position = Vector2(-1, 16)
 sprite_frames = SubResource("SpriteFrames_khvcd")
 animation = &"idle"
@@ -98,6 +111,17 @@ autoplay = "idle"
 [node name="DrillShakeComponent" type="Node" parent="." node_paths=PackedStringArray("node")]
 script = ExtResource("5_b00jq")
 node = NodePath("../ShipDrill")
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("7_iurph")
+sprite = NodePath("../ShipSprite")
+
+[node name="SpawnerComponent" type="Node" parent="."]
+script = ExtResource("7_sbuvn")
+scene = ExtResource("8_y3jeo")
+
+[node name="Cannon" type="Marker2D" parent="."]
+position = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)

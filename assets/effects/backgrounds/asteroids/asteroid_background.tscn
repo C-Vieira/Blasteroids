@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcxofs5nx63eh"]
+
+[ext_resource type="Script" path="res://assets/effects/backgrounds/asteroids/asteroid_background.gd" id="1_ounwt"]
+[ext_resource type="Texture2D" uid="uid://5qp8fqx0uj8j" path="res://assets/asteroid_background_layer1.png" id="1_xckhu"]
+[ext_resource type="Texture2D" uid="uid://13ct672fm4er" path="res://assets/asteroid_background_layer2.png" id="2_scodd"]
+
+[node name="AsteroidBackground" type="ParallaxBackground"]
+layer = 0
+script = ExtResource("1_ounwt")
+
+[node name="DistantAsteroidsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="DistantAsteroids" type="TextureRect" parent="DistantAsteroidsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_xckhu")
+
+[node name="CloseAsteroidsLayer" type="ParallaxLayer" parent="."]
+unique_name_in_owner = true
+motion_mirroring = Vector2(0, 240)
+
+[node name="CloseAsteroids" type="TextureRect" parent="CloseAsteroidsLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_scodd")

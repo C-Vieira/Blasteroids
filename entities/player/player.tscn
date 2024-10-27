@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_ebdg5"]
 [ext_resource type="Script" path="res://components/HurtComponent.gd" id="3_8x5l0"]
 [ext_resource type="PackedScene" uid="uid://b02a06lcfrtnl" path="res://components/spawner_component.tscn" id="3_crpag"]
-[ext_resource type="Texture2D" uid="uid://b86c7gvebuu4q" path="res://entities/player/art/player_ship.png" id="4_32608"]
+[ext_resource type="Texture2D" uid="uid://2anvjb80jpuq" path="res://assets/player_ship2.png" id="4_g48a6"]
 [ext_resource type="PackedScene" uid="uid://cyckrkweqnvss" path="res://entities/player/laser/laser.tscn" id="4_sfldr"]
 [ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="6_ubm2j"]
 [ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_lma0n"]
@@ -39,7 +39,7 @@ hurt_box_component = NodePath("../HurtboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2)
-texture = ExtResource("4_32608")
+texture = ExtResource("4_g48a6")
 
 [node name="SpawnerComponent" parent="." instance=ExtResource("3_crpag")]
 scene = ExtResource("4_sfldr")
@@ -49,7 +49,7 @@ position = Vector2(-4, -3)
 metadata/_edit_group_ = true
 
 [node name="Cannon2" type="Marker2D" parent="."]
-position = Vector2(5, -3)
+position = Vector2(4, -3)
 metadata/_edit_group_ = true
 
 [node name="DeathEffectSpawner" type="Node" parent="."]
@@ -83,6 +83,7 @@ visibility_layer = 2
 shape = SubResource("CapsuleShape2D_vvy3s")
 
 [node name="CollectionArea" type="Area2D" parent="."]
+position = Vector2(0, 1)
 collision_layer = 8
 collision_mask = 4
 

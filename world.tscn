@@ -29,5 +29,7 @@ z_index = -10
 metadata/_edit_lock_ = true
 
 [node name="HUD" parent="." instance=ExtResource("9_83www")]
+visible = false
 
 [node name="CRTEffect" parent="." instance=ExtResource("10_j6iuf")]
+visible = false
