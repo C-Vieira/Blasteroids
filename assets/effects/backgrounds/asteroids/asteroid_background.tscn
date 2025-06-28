@@ -6,6 +6,7 @@
 
 [node name="AsteroidBackground" type="ParallaxBackground"]
 layer = 0
+visible = false
 script = ExtResource("1_ounwt")
 
 [node name="DistantAsteroidsLayer" type="ParallaxLayer" parent="."]

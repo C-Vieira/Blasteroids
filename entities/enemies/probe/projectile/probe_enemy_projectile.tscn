@@ -1,0 +1,146 @@
+[gd_scene load_steps=15 format=3 uid="uid://nhf2to3rd8mu"]
+
+[ext_resource type="Texture2D" uid="uid://c1rcf5gjynlwx" path="res://entities/enemies/probe/projectile/art/pink_enemy_projectile.png" id="1_u8qcd"]
+[ext_resource type="Script" path="res://entities/enemies/probe/projectile/probe_enemy_projectile.gd" id="1_u8txq"]
+[ext_resource type="Script" path="res://components/HitboxComponent.gd" id="2_3agvn"]
+[ext_resource type="Script" path="res://components/MoveComponent.gd" id="3_fnm58"]
+[ext_resource type="Script" path="res://components/ScaleComponent.gd" id="4_sflu5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjvsm"]
+atlas = ExtResource("1_u8qcd")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pe13m"]
+atlas = ExtResource("1_u8qcd")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o5k07"]
+atlas = ExtResource("1_u8qcd")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lhwj"]
+atlas = ExtResource("1_u8qcd")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_452hk"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjvsm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pe13m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o5k07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7lhwj")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_h688t"]
+radius = 4.0
+
+[sub_resource type="Animation" id="Animation_n434t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mndj3"]
+resource_name = "oscilate"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Anchor:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-4, 0), Vector2(4, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Anchor:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_60als"]
+_data = {
+"RESET": SubResource("Animation_n434t"),
+"oscilate": SubResource("Animation_mndj3")
+}
+
+[node name="ProbeEnemyProjectile" type="Node2D"]
+script = ExtResource("1_u8txq")
+
+[node name="Anchor" type="Node2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Anchor"]
+sprite_frames = SubResource("SpriteFrames_452hk")
+autoplay = "default"
+frame = 3
+frame_progress = 0.468206
+
+[node name="HitboxComponent" type="Area2D" parent="Anchor"]
+collision_layer = 0
+script = ExtResource("2_3agvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Anchor/HitboxComponent"]
+shape = SubResource("CircleShape2D_h688t")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_fnm58")
+actor = NodePath("..")
+speed = 30
+direction = Vector2(0, 1)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+scale = Vector2(0.3, 0.3)
+
+[node name="ScaleComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
+script = ExtResource("4_sflu5")
+sprite = NodePath("../Anchor/AnimatedSprite2D")
+scale_amount = Vector2(2, 2)
+scale_duration = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_60als")
+}
+autoplay = "oscilate"

@@ -144,10 +144,11 @@ actor = NodePath("..")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 z_index = 5
 sprite_frames = SubResource("SpriteFrames_q7q65")
-animation = &"even_newer_sizes"
+animation = &"new_sizes"
 
 [node name="CrystalSprite" type="AnimatedSprite2D" parent="."]
 visible = false
+z_index = 6
 sprite_frames = SubResource("SpriteFrames_n7hgl")
 animation = &"crystals"
 

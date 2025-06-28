@@ -1,3 +1,4 @@
+class_name Enemy
 extends Node2D
 
 @onready var stats_component: StatsComponent = $StatsComponent
@@ -10,6 +11,7 @@ extends Node2D
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var destroyed_component: DestroyedComponent = $DestroyedComponent
 @onready var variable_pitch_audio_stream_player: VariablePitchAudioStreamPlayer = $VariablePitchAudioStreamPlayer
+@onready var score_component: ScoreComponent = $ScoreComponent
 
 func _ready() -> void:
 	visible_on_screen_notifier_2d.screen_exited.connect(queue_free)
@@ -19,5 +21,9 @@ func _ready() -> void:
 		shake_component.tween_shake()
 		variable_pitch_audio_stream_player.play_with_variance()
 	)
-	stats_component.no_health.connect(queue_free)
+	stats_component.no_health.connect(func():
+		score_component.adjust_score(score_component.adjust_amount)
+		queue_free()
+	)
+	
 	hitbox_component.hit_hurtbox.connect(destroyed_component.destroy.unbind(1))

@@ -1,15 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://b85vdsbj4ljxd"]
+[gd_scene load_steps=6 format=3 uid="uid://b85vdsbj4ljxd"]
 
 [ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="1_pij0u"]
 [ext_resource type="Script" path="res://game/generators/enemy/enemy_generator.gd" id="1_uufgj"]
+[ext_resource type="PackedScene" uid="uid://cn8v5akys43et" path="res://entities/enemies/mine/mine_enemy.tscn" id="2_pgkpc"]
+[ext_resource type="PackedScene" uid="uid://cejune0c8ro42" path="res://entities/enemies/probe/probe_enemy.tscn" id="3_7d87q"]
+[ext_resource type="Resource" uid="uid://dtugpjbo5yxki" path="res://game/resources/score/game_stats.tres" id="4_ryig6"]
 
 [node name="EnemyGenerator" type="Node2D"]
 script = ExtResource("1_uufgj")
+MineEnemyScene = ExtResource("2_pgkpc")
+ProbeEnemyScene = ExtResource("3_7d87q")
+game_stats = ExtResource("4_ryig6")
 
 [node name="SpawnerComponent" type="Node" parent="."]
 script = ExtResource("1_pij0u")
 
-[node name="EnemyTimer" type="Timer" parent="."]
+[node name="MineEnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
+one_shot = true
+autostart = true
+
+[node name="ProbeEnemySpawnTimer" type="Timer" parent="."]
+process_mode = 4
+wait_time = 5.0
 one_shot = true
 autostart = true

@@ -1,9 +1,10 @@
-[gd_scene load_steps=23 format=3 uid="uid://ctyxuxysfj3xe"]
+[gd_scene load_steps=24 format=3 uid="uid://ctyxuxysfj3xe"]
 
 [ext_resource type="Script" path="res://entities/player_miner/player_miner.gd" id="1_4gwhr"]
 [ext_resource type="Texture2D" uid="uid://dn20rbcfvhdlx" path="res://assets/miner_ship.png" id="1_xcowe"]
 [ext_resource type="Texture2D" uid="uid://2anvjb80jpuq" path="res://assets/player_ship2.png" id="2_hrkse"]
 [ext_resource type="Texture2D" uid="uid://ci4wibc7pkhgx" path="res://assets/miner_ship_drill.png" id="2_p7agf"]
+[ext_resource type="Texture2D" uid="uid://b86c7gvebuu4q" path="res://entities/player/art/player_ship.png" id="4_m7282"]
 [ext_resource type="Texture2D" uid="uid://cu5u7e0av3k87" path="res://assets/ship_booster.png" id="4_ulhgb"]
 [ext_resource type="Script" path="res://components/ShakeComponent.gd" id="5_b00jq"]
 [ext_resource type="Script" path="res://components/HitboxComponent.gd" id="6_6js0u"]
@@ -52,6 +53,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_m7282")
+}],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lowyq"]
@@ -95,6 +104,7 @@ script = ExtResource("1_4gwhr")
 
 [node name="ShipSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_g8vgf")
+animation = &"new_animation"
 
 [node name="ShipDrill" type="Sprite2D" parent="."]
 visible = false

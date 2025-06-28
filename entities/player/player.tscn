@@ -1,10 +1,9 @@
-[gd_scene load_steps=19 format=3 uid="uid://bj0csrpwvuve7"]
+[gd_scene load_steps=18 format=3 uid="uid://bj0csrpwvuve7"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_iptsk"]
 [ext_resource type="Script" path="res://components/StatsComponent.gd" id="2_ebdg5"]
 [ext_resource type="Script" path="res://components/HurtComponent.gd" id="3_8x5l0"]
-[ext_resource type="PackedScene" uid="uid://b02a06lcfrtnl" path="res://components/spawner_component.tscn" id="3_crpag"]
-[ext_resource type="Texture2D" uid="uid://2anvjb80jpuq" path="res://assets/player_ship2.png" id="4_g48a6"]
+[ext_resource type="Texture2D" uid="uid://b86c7gvebuu4q" path="res://entities/player/art/player_ship.png" id="4_pul1g"]
 [ext_resource type="PackedScene" uid="uid://cyckrkweqnvss" path="res://entities/player/laser/laser.tscn" id="4_sfldr"]
 [ext_resource type="Script" path="res://components/HurtboxComponent.gd" id="6_ubm2j"]
 [ext_resource type="Script" path="res://components/SpawnerComponent.gd" id="7_lma0n"]
@@ -39,9 +38,10 @@ hurt_box_component = NodePath("../HurtboxComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 2)
-texture = ExtResource("4_g48a6")
+texture = ExtResource("4_pul1g")
 
-[node name="SpawnerComponent" parent="." instance=ExtResource("3_crpag")]
+[node name="SpawnerComponent" type="Node" parent="."]
+script = ExtResource("7_lma0n")
 scene = ExtResource("4_sfldr")
 
 [node name="Cannon1" type="Marker2D" parent="."]
